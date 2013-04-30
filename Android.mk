@@ -493,14 +493,15 @@ LOCAL_C_INCLUDES := \
 	frameworks/opt/emoji \
 	external/expat/lib
 
-LOCAL_EXPORT_C_INCLUDES := \
-	$(LOCAL_PATH)/include/core \
-	$(LOCAL_PATH)/include/effects \
-	$(LOCAL_PATH)/include/gpu \
-	$(LOCAL_PATH)/include/images \
-	$(LOCAL_PATH)/include/pipe \
-	$(LOCAL_PATH)/include/ports \
-	$(LOCAL_PATH)/include/utils
+
+# Android's -D_FORTIFY_SOURCE=2 extensions are incompatibile with SkString.
+# Revert to -D_FORTIFY_SOURCE=1
+LOCAL_CFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1
+
+ifeq ($(NO_FALLBACK_FONT),true)
+	LOCAL_CFLAGS += -DNO_FALLBACK_FONT
+endif
+
 
 LOCAL_LDLIBS += -lpthread
 
