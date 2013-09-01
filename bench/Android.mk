@@ -83,4 +83,6 @@ LOCAL_MODULE_TAGS := optional
 
 LOCAL_CFLAGS := -fno-strict-aliasing
 
+LOCAL_FDO_SUPPORT := true
+
 include $(BUILD_EXECUTABLE)

@@ -505,6 +505,7 @@ ifeq ($(NO_FALLBACK_FONT),true)
 	LOCAL_CFLAGS += -DNO_FALLBACK_FONT
 endif
 
+LOCAL_FDO_SUPPORT := true
 
 LOCAL_LDLIBS += -lpthread
 
