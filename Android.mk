@@ -494,9 +494,13 @@ LOCAL_C_INCLUDES := \
 	external/expat/lib
 
 
-# Android's -D_FORTIFY_SOURCE=2 extensions are incompatibile with SkString.
-# Revert to -D_FORTIFY_SOURCE=1
-LOCAL_CFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1
+# FIXME this should really be limited to files that need it, such as
+# src/utils/SkCamera.cpp -- pretty bad violations going on in there,
+# but most of the rest of skia is good
+LOCAL_CFLAGS += -fno-strict-aliasing
+
+LOCAL_LDLIBS += -lpthread
+
 
 ifeq ($(NO_FALLBACK_FONT),true)
 	LOCAL_CFLAGS += -DNO_FALLBACK_FONT
