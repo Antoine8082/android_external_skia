@@ -494,12 +494,9 @@ LOCAL_C_INCLUDES := \
 	external/expat/lib
 
 
-# if all else fails...
-#LOCAL_CFLAGS += -fno-strict-aliasing
-#LOCAL_CFLAGS += -Wno-error=strict-aliasing
-
-LOCAL_LDLIBS += -lpthread
-
+# Android's -D_FORTIFY_SOURCE=2 extensions are incompatibile with SkString.
+# Revert to -D_FORTIFY_SOURCE=1
+LOCAL_CFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1
 
 ifeq ($(NO_FALLBACK_FONT),true)
 	LOCAL_CFLAGS += -DNO_FALLBACK_FONT
